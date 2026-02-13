@@ -15,6 +15,8 @@ import DepartmentDetails from './pages/DepartmentDetails';
 import Roles from './pages/Roles';
 import AuditLogs from './pages/AuditLogs';
 import Settings from './pages/Settings';
+import Attendance from './pages/Attendance';
+import AttendanceAnalytics from './pages/AttendanceAnalytics';
 
 function App() {
     return (
@@ -38,6 +40,8 @@ function App() {
                                     <Route path="departments/:id" element={<DepartmentDetails />} />
                                     <Route path="roles" element={<Roles />} />
                                     <Route path="audit-logs" element={<AuditLogs />} />
+                                    <Route path="attendance" element={<Attendance />} />
+                                    <Route path="attendance/analytics" element={<AttendanceAnalytics />} />
                                     <Route path="settings" element={<Settings />} />
                                     <Route path="/" element={<Navigate to="/dashboard" replace />} />
                                 </Routes>

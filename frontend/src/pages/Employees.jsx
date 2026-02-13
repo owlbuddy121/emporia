@@ -26,6 +26,9 @@ import {
     Alert,
     Menu,
 } from '@mui/material';
+import Loader from '../components/common/Loader';
+import LottieAnimation from '../components/common/LottieAnimation';
+import { loadingLottie } from '../assets/animations/loading';
 import {
     Search as SearchIcon,
     Add as AddIcon,
@@ -184,11 +187,7 @@ const Employees = () => {
     });
 
     if (loading) {
-        return (
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">
-                <CircularProgress />
-            </Box>
-        );
+        return <Loader fullScreen message="Loading workforce data..." animationData={loadingLottie} />;
     }
 
     return (
@@ -349,8 +348,19 @@ const Employees = () => {
                     </TableBody>
                 </Table>
                 {filteredEmployees.length === 0 && (
-                    <Box sx={{ p: 6, textAlign: 'center' }}>
-                        <Typography color="text.secondary" fontWeight={600}>No workforce entries found matching your criteria.</Typography>
+                    <Box sx={{ p: 8, textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <LottieAnimation
+                            animationData={loadingLottie}
+                            width={150}
+                            height={150}
+                            style={{ opacity: 0.5, filter: 'grayscale(100%)' }}
+                        />
+                        <Typography variant="h6" color="text.secondary" fontWeight={700} mt={2}>
+                            No workforce entries found
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            Try adjusting your search filters or add a new employee.
+                        </Typography>
                     </Box>
                 )}
             </TableContainer>

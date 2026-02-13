@@ -11,6 +11,9 @@ import {
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { getDashboardStats } from '../services/dashboardService';
+import Loader from '../components/common/Loader';
+import { loadingLottie } from '../assets/animations/loading';
+import AttendanceWidget from '../components/dashboard/AttendanceWidget';
 
 const StatCard = ({ title, value, icon, color, trend }) => (
     <Card sx={{
@@ -168,6 +171,10 @@ const Dashboard = () => {
         }
     ];
 
+    if (loading) {
+        return <Loader fullScreen message="Preparing your dashboard..." animationData={loadingLottie} />;
+    }
+
     return (
         <Box>
             {/* Hero Section ... */}
@@ -180,19 +187,26 @@ const Dashboard = () => {
                 </Typography>
             </Box>
 
-            {/* Statistics */}
+            {/* Attendance & Stats */}
             <Grid container spacing={4} sx={{ mb: 8 }}>
-                {dashboardStats.map((stat, index) => (
-                    <Grid item xs={12} sm={6} md={3} key={index}>
-                        <StatCard
-                            title={stat.title}
-                            value={stat.value}
-                            icon={stat.icon}
-                            color={stat.color}
-                            trend={stat.trend}
-                        />
+                <Grid item xs={12} md={4} lg={3}>
+                    <AttendanceWidget />
+                </Grid>
+                <Grid item xs={12} md={8} lg={9}>
+                    <Grid container spacing={4}>
+                        {dashboardStats.map((stat, index) => (
+                            <Grid item xs={12} sm={6} md={3} key={index}>
+                                <StatCard
+                                    title={stat.title}
+                                    value={stat.value}
+                                    icon={stat.icon}
+                                    color={stat.color}
+                                    trend={stat.trend}
+                                />
+                            </Grid>
+                        ))}
                     </Grid>
-                ))}
+                </Grid>
             </Grid>
 
             {/* Modules */}

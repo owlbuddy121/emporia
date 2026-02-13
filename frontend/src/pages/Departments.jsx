@@ -19,6 +19,9 @@ import {
     CircularProgress,
     Alert
 } from '@mui/material';
+import Loader from '../components/common/Loader';
+import LottieAnimation from '../components/common/LottieAnimation';
+import { loadingLottie } from '../assets/animations/loading';
 import {
     Business as BusinessIcon,
     Add as AddIcon,
@@ -178,11 +181,7 @@ const Departments = () => {
     };
 
     if (loading) {
-        return (
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">
-                <CircularProgress />
-            </Box>
-        );
+        return <Loader fullScreen message="Loading departments..." animationData={loadingLottie} />;
     }
 
     return (
@@ -231,6 +230,30 @@ const Departments = () => {
             </Grid>
 
             {/* Add Department Dialog */}
+            {!loading && departments.length === 0 && (
+                <Box sx={{ p: 8, textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <LottieAnimation
+                        animationData={loadingLottie}
+                        width={150}
+                        height={150}
+                        style={{ opacity: 0.5, filter: 'grayscale(100%)' }}
+                    />
+                    <Typography variant="h6" color="text.secondary" fontWeight={700} mt={2}>
+                        No departments found
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Get started by creating your first department.
+                    </Typography>
+                    <Button
+                        variant="outlined"
+                        startIcon={<AddIcon />}
+                        onClick={handleOpen}
+                        sx={{ mt: 3, borderRadius: 3, fontWeight: 700 }}
+                    >
+                        Create Department
+                    </Button>
+                </Box>
+            )}
             <Dialog
                 open={open}
                 onClose={handleClose}

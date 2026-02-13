@@ -11,6 +11,7 @@ const createAuditLog = require('../utils/auditLogger');
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
+        console.log('Login attempt:', { email, passwordProvided: !!password });
 
         // Validate input
         if (!email || !password) {
@@ -27,6 +28,7 @@ const login = async (req, res) => {
             .populate('department');
 
         if (!user) {
+            console.log('User not found for email:', email);
             return res.status(401).json({
                 success: false,
                 message: 'Invalid credentials',
@@ -45,11 +47,13 @@ const login = async (req, res) => {
         const isPasswordMatch = await user.comparePassword(password);
 
         if (!isPasswordMatch) {
+            console.log('Password mismatch for user:', email);
             return res.status(401).json({
                 success: false,
                 message: 'Invalid credentials',
             });
         }
+        console.log('Login successful for:', email);
 
         // Create token
         const token = jwt.sign({ id: user._id }, jwtSecret, {

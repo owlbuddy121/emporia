@@ -34,6 +34,9 @@ import {
     RadioButtonUnchecked as UncheckedIcon,
 } from '@mui/icons-material';
 import { getRoles, createRole, updateRole, deleteRole } from '../services/roleService';
+import LottieAnimation from '../components/common/LottieAnimation';
+import Loader from '../components/common/Loader';
+import { loadingLottie } from '../assets/animations/loading';
 import ConfirmDialog from '../components/common/ConfirmDialog';
 
 const RoleCard = ({ role, onEdit, onDelete, color }) => {
@@ -255,11 +258,7 @@ const Roles = () => {
     };
 
     if (loading) {
-        return (
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">
-                <CircularProgress />
-            </Box>
-        );
+        return <Loader fullScreen message="Loading system roles..." animationData={loadingLottie} />;
     }
 
     return (
@@ -306,6 +305,30 @@ const Roles = () => {
             </Grid>
 
             {/* Role Dialog */}
+            {!loading && roles.length === 0 && (
+                <Box sx={{ p: 8, textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <LottieAnimation
+                        animationData={loadingLottie}
+                        width={150}
+                        height={150}
+                        style={{ opacity: 0.5, filter: 'grayscale(100%)' }}
+                    />
+                    <Typography variant="h6" color="text.secondary" fontWeight={700} mt={2}>
+                        No roles defined
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Create a role to define user permissions.
+                    </Typography>
+                    <Button
+                        variant="outlined"
+                        startIcon={<AddIcon />}
+                        onClick={() => handleOpen()}
+                        sx={{ mt: 3, borderRadius: 3, fontWeight: 700 }}
+                    >
+                        Create Role
+                    </Button>
+                </Box>
+            )}
             <Dialog
                 open={open}
                 onClose={handleClose}

@@ -24,6 +24,8 @@ import {
     AdminPanelSettings as AdminIcon,
     Business as DeptIcon,
     History as AuditIcon,
+    AccessTime as AttendanceIcon,
+    Analytics as AnalyticsIcon,
     Settings as SettingsIcon,
 } from '@mui/icons-material';
 
@@ -37,6 +39,8 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
 
     const menuItems = [
         { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
+        { text: 'Attendance', icon: <AttendanceIcon />, path: '/attendance' },
+        { text: 'Attendance Analytics', icon: <AnalyticsIcon />, path: '/attendance/analytics' },
     ];
 
     // Role-based menu items

@@ -25,6 +25,8 @@ import {
     CircularProgress,
     Alert
 } from '@mui/material';
+import Loader from '../components/common/Loader';
+import { loadingLottie } from '../assets/animations/loading';
 
 const LeaveDialog = ({ open, onClose, onApply }) => {
     const [formData, setFormData] = React.useState({
@@ -220,9 +222,7 @@ const LeaveManagement = () => {
 
             <Box sx={{ mt: 3 }}>
                 {loading ? (
-                    <Box display="flex" justifyContent="center" py={10}>
-                        <CircularProgress />
-                    </Box>
+                    <Loader message="Loading leave requests..." animationData={loadingLottie} />
                 ) : filteredLeaves.length > 0 ? (
                     <Grid container spacing={4}>
                         {filteredLeaves.map((leave) => (
