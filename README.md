@@ -138,7 +138,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📧 Support
 
-For support, email support@emporia.com or open an issue in the repository.
+For support, email info@owlbuddy.com or open an issue in the repository.
 
 ---
 
