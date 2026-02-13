@@ -11,7 +11,7 @@ Emporia is a modern, open-source Employee Management System (EMS) designed to st
 
 ## 📸 Screenshots
 
-| Dashboard Overview | Employee Management | Leaves & Approvals |
+| Dashboard Overview | Attendance Analytics | Roles |
 |:---:|:---:|:---:|
 | ![Dashboard](screenshots/Emporia%20-%20Employee%20Management%20System.png) | ![Employees](screenshots/Emporia%20-%20Employee%20Management%20System%20(1).png) | ![Leaves](screenshots/Emporia%20-%20Employee%20Management%20System%20(2).png) |
 
