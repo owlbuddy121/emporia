@@ -3,191 +3,138 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)
 ![React](https://img.shields.io/badge/react-18.2.0-blue.svg)
+![MongoDB](https://img.shields.io/badge/mongodb-6.0-green.svg)
 
-An open-source Employee Management System (EMS) designed to provide a role-based, modular, and scalable platform for managing employee profiles, leaves, roles, departments, and organizational workflows.
+> **Empowering Organizational Efficiency**
 
-## 🚀 Features
+Emporia is a modern, open-source Employee Management System (EMS) designed to streamline HR processes. It provides a robust, role-based platform for managing employee profiles, departments, leaves, and organizational workflows with a focus on user experience and scalability.
 
-- **Role-Based Access Control (RBAC)** - Four distinct roles with granular permissions
-- **Employee Management** - Complete CRUD operations with search and filtering
-- **Department Management** - Organize employees by departments
-- **Leave Management** - Apply, approve, and track employee leaves
-- **Audit Logging** - Track all system activities
-- **JWT Authentication** - Secure token-based authentication
-- **Responsive UI** - Built with Material-UI for a modern look
+## 📸 Screenshots
+
+| Dashboard Overview | Employee Management | Leaves & Approvals |
+|:---:|:---:|:---:|
+| ![Dashboard](screenshots/Emporia%20-%20Employee%20Management%20System.png) | ![Employees](screenshots/Emporia%20-%20Employee%20Management%20System%20(1).png) | ![Leaves](screenshots/Emporia%20-%20Employee%20Management%20System%20(2).png) |
+
+## 🚀 Key Features
+
+- **🔐 Robust Security**
+  - **JWT Authentication:** Secure, stateless authentication mechanism.
+  - **Role-Based Access Control (RBAC):** Granular permissions for Super Admin, HR Admin, Manager, and Employee.
+  - **Audit Logging:** Comprehensive tracking of all critical system actions.
+
+- **👥 Employee & Team Management**
+  - **Centralized Directory:** Manage employee profiles with ease.
+  - **Department Organization:** Structure teams effectively.
+  - **Role Management:** Define custom roles and permissions.
+
+- **📅 Leave & Attendance**
+  - **Leave Management:** streamlined application and approval workflows.
+  - **Attendance Tracking:** Monitor daily attendance and work hours.
+  - **Analytics:** Visual insights into attendance trends and patterns.
+
+- **📊 Insights & Reporting**
+  - **Dashboard:** At-a-glance view of key metrics.
+  - **Data Visualization:** Interactive charts for better decision-making.
+
+- **💻 Modern Tech Stack**
+  - **Frontend:** React 18, Material-UI, Recharts
+  - **Backend:** Node.js, Express, Mongoose
+  - **Database:** MongoDB
 
 ## 📋 Roles & Permissions
 
-### Super Admin
-- Full system control
-- Manage roles & permissions
-- View audit logs
-- Manage all employees and departments
-
-### HR Admin
-- Manage employees
-- Approve/reject leaves
-- Manage departments
-- View reports
-
-### Manager
-- View team members
-- Approve/reject team leaves
-- Limited editing of team profiles
-
-### Employee
-- View/edit own profile
-- Apply for leaves
-- View leave status
+| Role | Description | Key Capabilities |
+| :--- | :--- | :--- |
+| **Super Admin** | Full system control | Manage roles, view audit logs, configure system settings. |
+| **HR Admin** | HR Operations | Manage employees, departments, and leave approvals. |
+| **Manager** | Team Leadership | View team members, approve team leaves. |
+| **Employee** | Self-Service | View profile, apply for leaves, check status. |
 
 ## 🛠️ Tech Stack
 
-**Frontend:**
-- React 18
-- Material-UI
-- React Router
-- Axios
-- React Hook Form + Yup
+### Frontend
+- **Framework:** React 18
+- **UI Library:** Material-UI (MUI) v5
+- **State Management:** React Context API
+- **Routing:** React Router v6
+- **HTTP Client:** Axios
+- **Form Handling:** React Hook Form + Yup
+- **Charts:** Recharts
 
-**Backend:**
-- Node.js
-- Express.js
-- MongoDB
-- JWT
-- Bcrypt
+### Backend
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **Database:** MongoDB
+- **ODM:** Mongoose
+- **Authentication:** JWT (JSON Web Tokens)
+- **Security:** Bcrypt, Helmet, CORS
 
-## 📦 Installation
+## 📦 Getting Started
 
 ### Prerequisites
 - Node.js >= 18.0.0
 - MongoDB >= 6.0
 
-### Backend Setup
+### Installation
 
-1. Navigate to backend directory:
-```bash
-cd backend
-```
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/yourusername/emporia.git
+    cd emporia
+    ```
 
-2. Install dependencies:
-```bash
-npm install
-```
+2.  **Backend Setup**
+    ```bash
+    cd backend
+    npm install
+    # Create .env file
+    cp .env.example .env
+    # Update .env with your MongoDB URI
+    npm run seed # Seed initial data
+    npm run dev  # Start server on port 5000
+    ```
 
-3. Create `.env` file (copy from `.env.example`):
-```bash
-cp .env.example .env
-```
-
-4. Update `.env` with your MongoDB URI and JWT secret
-
-5. Seed the database with initial data:
-```bash
-npm run seed
-```
-
-6. Start the server:
-```bash
-npm run dev
-```
-
-The backend will run on `http://localhost:5000`
-
-### Frontend Setup
-
-1. Navigate to frontend directory:
-```bash
-cd frontend
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
-npm run dev
-```
-
-The frontend will run on `http://localhost:3000`
+3.  **Frontend Setup**
+    ```bash
+    cd frontend
+    npm install
+    npm run dev  # Start client on port 3000
+    ```
 
 ## 🔑 Default Credentials
 
-After seeding the database, you can login with:
+Use these credentials to explore different roles after seeding the database:
 
 | Role | Email | Password |
-|------|-------|----------|
-| Super Admin | admin@emporia.com | admin123 |
-| HR Admin | hr@emporia.com | hradmin123 |
-| Manager | john.smith@emporia.com | manager123 |
-| Employee | alice.johnson@emporia.com | employee123 |
+| :--- | :--- | :--- |
+| **Super Admin** | `admin@emporia.com` | `admin123` |
+| **HR Admin** | `hr@emporia.com` | `hradmin123` |
+| **Manager** | `john.smith@emporia.com` | `manager123` |
+| **Employee** | `alice.johnson@emporia.com` | `employee123` |
 
-## 📚 API Documentation
+## 📚 API Overview
 
-### Authentication
-- `POST /api/auth/login` - User login
-- `GET /api/auth/me` - Get current user
-- `PUT /api/auth/change-password` - Change password
-- `PUT /api/auth/reset-password/:userId` - Reset user password (Admin)
+The backend exposes a comprehensive RESTful API. Key endpoints include:
 
-### Employees
-- `GET /api/employees` - Get all employees
-- `GET /api/employees/:id` - Get employee by ID
-- `POST /api/employees` - Create employee
-- `PUT /api/employees/:id` - Update employee
-- `DELETE /api/employees/:id` - Delete employee (soft delete)
-- `GET /api/employees/stats/dashboard` - Get dashboard statistics
-
-### Departments
-- `GET /api/departments` - Get all departments
-- `GET /api/departments/:id` - Get department by ID
-- `POST /api/departments` - Create department
-- `PUT /api/departments/:id` - Update department
-- `DELETE /api/departments/:id` - Delete department
-
-### Roles
-- `GET /api/roles` - Get all roles
-- `GET /api/roles/:id` - Get role by ID
-- `POST /api/roles` - Create role
-- `PUT /api/roles/:id` - Update role
-- `DELETE /api/roles/:id` - Delete role
-
-### Leaves
-- `GET /api/leaves` - Get leaves (filtered by role)
-- `GET /api/leaves/my-leaves` - Get current user's leaves
-- `POST /api/leaves` - Apply for leave
-- `PUT /api/leaves/:id/approve` - Approve leave
-- `PUT /api/leaves/:id/reject` - Reject leave
-- `GET /api/leaves/stats` - Get leave statistics
-
-### Audit Logs
-- `GET /api/audit-logs` - Get audit logs (Super Admin only)
-- `GET /api/audit-logs/stats` - Get audit statistics
-
-## 🐳 Docker Support
-
-Coming soon! Docker configuration will be added for easy deployment.
+-   **Auth:** `/api/auth/login`, `/api/auth/me`
+-   **Employees:** `/api/employees` (CRUD)
+-   **Departments:** `/api/departments` (CRUD)
+-   **Leaves:** `/api/leaves` (Apply, Approve, Reject)
+-   **Attendance:** `/api/attendance` (Punch-in/out, Stats)
+-   **Audit:** `/api/audit-logs`
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Contributions are welcome! Please perform the following steps:
+1.  Fork the project.
+2.  Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4.  Push to the branch (`git push origin feature/AmazingFeature`).
+5.  Open a Pull Request.
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- Built with ❤️ for the open-source community
-- Inspired by modern HR management needs
-- Designed for scalability and extensibility
+Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📧 Support
 
