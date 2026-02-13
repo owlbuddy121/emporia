@@ -17,6 +17,6 @@ router.get('/', getRoles);
 router.get('/:id', getRole);
 router.post('/', authorize('role:create'), createRole);
 router.put('/:id', authorize('role:edit'), updateRole);
-router.delete('/:id', authorize('role:delete'), deletRole);
+router.delete('/:id', authorize('role:delete'), deleteRole);
 
 module.exports = router;

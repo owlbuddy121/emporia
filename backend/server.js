@@ -10,12 +10,33 @@ const departmentRoutes = require('./routes/departments');
 const roleRoutes = require('./routes/roles');
 const leaveRoutes = require('./routes/leaves');
 const auditRoutes = require('./routes/audit');
+const dashboardRoutes = require('./routes/dashboard');
+const reportRoutes = require('./routes/reports');
+const seedDatabase = require('./seeds/index');
 
 // Initialize express app
 const app = express();
 
-// Connect to database
-connectDB();
+// Connect to database and seed
+const setupDB = async () => {
+    await connectDB();
+
+    // Auto-seed in-memory or empty development database
+    if (process.env.MONGODB_URI === 'in-memory' || process.env.NODE_ENV === 'development') {
+        try {
+            const User = require('./models/User');
+            const userCount = await User.countDocuments();
+            if (userCount === 0) {
+                console.log('🔄 Database empty, auto-seeding...');
+                await seedDatabase(false);
+            }
+        } catch (error) {
+            console.error('Auto-seeding failed:', error);
+        }
+    }
+};
+
+setupDB();
 
 // Middleware
 app.use(cors());
@@ -35,6 +56,8 @@ app.use('/api/departments', departmentRoutes);
 app.use('/api/roles', roleRoutes);
 app.use('/api/leaves', leaveRoutes);
 app.use('/api/audit-logs', auditRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/reports', reportRoutes);
 
 // Health check route
 app.get('/health', (req, res) => {

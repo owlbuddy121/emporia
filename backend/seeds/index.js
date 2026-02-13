@@ -72,12 +72,14 @@ const departments = [
     { name: 'Sales', description: 'Sales and business development' },
 ];
 
-const seedDatabase = async () => {
+const seedDatabase = async (shouldExit = true) => {
     try {
         console.log('🌱 Starting database seeding...');
 
-        // Connect to database
-        await connectDB();
+        // Connect to database if not already connected
+        if (mongoose.connection.readyState === 0) {
+            await connectDB();
+        }
 
         // Clear existing data
         console.log('🗑️  Clearing existing data...');
@@ -125,12 +127,12 @@ const seedDatabase = async () => {
         const hrAdmin = await User.create({
             name: 'HR Manager',
             email: 'hr@emporia.com',
-            password: 'hr123',
+            password: 'hradmin123',
             role: hrAdminRole._id,
             department: hrDept._id,
             status: 'active',
         });
-        console.log('✅ Created HR Admin: hr@emporia.com / hr123');
+        console.log('✅ Created HR Admin: hr@emporia.com / hradmin123');
 
         // Engineering Manager
         const engManager = await User.create({
@@ -187,20 +189,22 @@ const seedDatabase = async () => {
         console.log(`✅ Created ${createdEmployees.length} sample employees`);
 
         console.log('\n🎉 Database seeding completed successfully!');
-        console.log('\n📋 Login Credentials:');
-        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        console.log('Super Admin: admin@emporia.com / admin123');
-        console.log('HR Admin:    hr@emporia.com / hr123');
-        console.log('Manager:     john.smith@emporia.com / manager123');
-        console.log('Employee:    alice.johnson@emporia.com / employee123');
-        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
-        process.exit(0);
+        if (shouldExit) {
+            process.exit(0);
+        }
     } catch (error) {
         console.error('❌ Error seeding database:', error);
-        process.exit(1);
+        if (shouldExit) {
+            process.exit(1);
+        }
+        throw error;
     }
 };
 
-// Run seeder
-seedDatabase();
+module.exports = seedDatabase;
+
+// Run seeder if called directly
+if (require.main === module) {
+    seedDatabase();
+}

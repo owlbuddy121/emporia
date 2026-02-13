@@ -119,7 +119,7 @@ After seeding the database, you can login with:
 | Role | Email | Password |
 |------|-------|----------|
 | Super Admin | admin@emporia.com | admin123 |
-| HR Admin | hr@emporia.com | hr123 |
+| HR Admin | hr@emporia.com | hradmin123 |
 | Manager | john.smith@emporia.com | manager123 |
 | Employee | alice.johnson@emporia.com | employee123 |
 
@@ -195,4 +195,4 @@ For support, email support@emporia.com or open an issue in the repository.
 
 ---
 
-**Made with ❤️ by the Emporia Team**
+**Made with ❤️ by the Owlbuddy Team**
